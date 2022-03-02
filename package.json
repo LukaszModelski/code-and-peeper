@@ -1,5 +1,5 @@
 {
-  "name": "frontend-webpack-bundler-typescript",
+  "name": "code-and-pepper-recruitment-task",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,13 +8,15 @@
     "dev": "webpack --mode development",
     "prod": "jest --passWithNoTests && webpack --mode production",
     "test": "jest --passWithNoTests",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint --fix src/**/*.js",
-    "format": "prettier src/**/*.js --write --config ./.prettierrc"
+    "lint": "eslint src/**/*.tsx",
+    "lint:fix": "eslint --fix src/**/*.tsx",
+    "format": "prettier src/**/*.tsx --write --config ./.prettierrc"
   },
   "author": "Łukasz Modelski",
   "license": "ISC",
   "devDependencies": {
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.13",
     "css-loader": "^5.2.1",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.4.0",
@@ -33,5 +35,11 @@
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.26.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2"
+  }
 }
