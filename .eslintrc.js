@@ -18,9 +18,15 @@ module.exports = {
     amd: true, 
     node: true 
   },
+  parser: "@typescript-eslint/parser",
+  plugins: [
+    "@typescript-eslint"
+  ],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
     'plugin:prettier/recommended' // Make this the last element so prettier config overrides other formatting rules
   ],
   rules: {
