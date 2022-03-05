@@ -7,12 +7,12 @@ interface PlayerType {
 }
 
 export const Player = ({ nr }: PlayerType) => {
-  const score: number = useSelector((state: stateType) => state.score[`player${nr}`]);
+  const score: number = useSelector((state: stateType) => state[`player${nr}`].score);
 
   return (
     <div className='player'>
       <h2 className='player__name'>Player {nr}</h2>
-      <div className='player__score'>{score}</div>
+      <div className='player__score'>Score: {score}</div>
     </div>
   );
 };
