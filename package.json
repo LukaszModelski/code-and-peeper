@@ -7,7 +7,8 @@
     "serve": "webpack serve --mode development",
     "dev": "webpack --mode development",
     "prod": "jest --passWithNoTests && webpack --mode production",
-    "test": "jest --passWithNoTests",
+    "test": "jest --passWithNoTests --testPathIgnorePatterns ./src/js/api.test.js",
+    "test:api": "jest ./src/js/api.test.js",
     "lint": "eslint src/**/*.tsx",
     "lint:fix": "eslint --fix src/**/*.tsx",
     "format": "prettier src/**/*.tsx --write --config ./.prettierrc"

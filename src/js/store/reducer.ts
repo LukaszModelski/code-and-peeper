@@ -43,7 +43,7 @@ export type stateType = {
   winner: winnerType;
 };
 
-const initialState: stateType = {
+export const initialState: stateType = {
   player1: {
     score: 0,
     cardId: undefined,
