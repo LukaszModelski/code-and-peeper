@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { stateType, cardType, personAtrType, starshipAtrType } from '../../js/store/reducer';
 import {
   setCardType,
-  setPersonAttribute,
-  setStarshipAttribute,
+  setAttribute,
   setPlayerCardId,
   setCard,
   clearPlayersCardId,
+  increasePlayerScore,
+  setWinner,
+  clearWinner,
 } from '../../js/store/actions';
 import { config } from '../../js/config';
 import { fetchPersonById, fetchStarshipById } from '../../js/api';
@@ -18,21 +20,20 @@ export const Controls = () => {
 
   const cards = useSelector((state: stateType) => state.cards);
   const cardType = useSelector((state: stateType) => state.cardType);
-  const personAtr = useSelector((state: stateType) => state.personAtr);
-  const starshipAtr = useSelector((state: stateType) => state.starshipAtr);
+  const attribute = useSelector((state: stateType) => state.attribute);
+  const personAtr = useSelector((state: stateType) => state.attribute.people);
+  const starshipAtr = useSelector((state: stateType) => state.attribute.starships);
+  const player1cardId = useSelector((state: stateType) => state.player1.cardId);
+  const player2cardId = useSelector((state: stateType) => state.player2.cardId);
 
   const handleCardTypeChange = (cardType: cardType): void => {
+    dispatch(clearWinner());
     dispatch(clearPlayersCardId());
     dispatch(setCardType(cardType));
   };
 
   const handleAttributeChange = (attribute: personAtrType & starshipAtrType): void => {
-    if (cardType === config.cardType.people) {
-      dispatch(setPersonAttribute(attribute));
-    }
-    if (cardType === config.cardType.starships) {
-      dispatch(setStarshipAttribute(attribute));
-    }
+    dispatch(setAttribute(attribute, cardType));
   };
 
   const drawRandomCard = () => {
@@ -40,9 +41,28 @@ export const Controls = () => {
     return randFrom0ToX(idRange);
   };
 
+  const compareAttributes = () => {
+    const attrToCompare = attribute[cardType];
+    const player1Atr = parseFloat(cards[cardType][player1cardId][attrToCompare]);
+    const player2Atr = parseFloat(cards[cardType][player2cardId][attrToCompare]);
+
+    if (isNaN(player1Atr) || isNaN(player1Atr) || player1Atr === player2Atr) {
+      return;
+    }
+
+    if (player1Atr > player2Atr) {
+      dispatch(increasePlayerScore('player1'));
+      dispatch(setWinner(1));
+    } else {
+      dispatch(increasePlayerScore('player2'));
+      dispatch(setWinner(2));
+    }
+  };
+
   const handlePlayButton = async () => {
-    // there are some missing enpoints (404) for starships. So I decided to try redraw new card up to 100 times.
-    let retries = 100;
+    dispatch(clearWinner());
+    dispatch(clearPlayersCardId());
+    let retries = 100; // there are some missing enpoints (404) for starships. So I decided to try redraw new card up to 100 times.
     let times = 2;
     while (times > 0 && retries > 0) {
       const cardId = drawRandomCard();
@@ -77,6 +97,12 @@ export const Controls = () => {
         {atr}
       </button>
     ));
+
+  useEffect(() => {
+    if (player1cardId && player2cardId) {
+      compareAttributes();
+    }
+  }, [player1cardId, player2cardId]);
 
   return (
     <div className='controls'>

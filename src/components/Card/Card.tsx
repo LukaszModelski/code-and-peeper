@@ -6,11 +6,12 @@ import { CardStarship } from './CardStarship';
 interface CardComponentType {
   cardType: cardType;
   cardData: any;
+  winner: boolean;
 }
 
-export const Card = ({ cardType, cardData }: CardComponentType) => {
+export const Card = ({ cardType, cardData, winner }: CardComponentType) => {
   return (
-    <div className='card'>
+    <div className={`card${winner ? ' card--winner' : ''}`}>
       {cardData ? cardType === 'people' ? <CardPerson cardData={cardData} /> : <CardStarship cardData={cardData} /> : '...'}
     </div>
   );
