@@ -1,4 +1,4 @@
-# Webpack 5 frontend bundler
+# Code&Pepper recruitment task
 Features:
 * `Typescript`
 * `SCSS` for styling
