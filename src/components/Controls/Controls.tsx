@@ -106,29 +106,34 @@ export const Controls = () => {
 
   return (
     <div className='controls'>
-      <p>Play with:</p>
-      <button
-        className={`controls__button${cardType === config.cardType.people ? ' controls__button--active' : ''}`}
-        onClick={() => {
-          handleCardTypeChange(config.cardType.people);
-        }}
-      >
-        People
-      </button>
-      <button
-        className={`controls__button${cardType === config.cardType.starships ? ' controls__button--active' : ''}`}
-        onClick={() => {
-          handleCardTypeChange(config.cardType.starships);
-        }}
-      >
-        Vehicles
-      </button>
-      <p>Compare:</p>
-      {renderAtrButtons()}
-      <hr />
-      <button onClick={handlePlayButton} className='controls__button'>
-        Play
-      </button>
+      <div className="controls__block">
+        <button onClick={handlePlayButton} className='controls__play-button'>
+          Play
+        </button>
+      </div>
+      <div className="controls__block">
+        <p>Play with:</p>
+        <button
+          className={`controls__button${cardType === config.cardType.people ? ' controls__button--active' : ''}`}
+          onClick={() => {
+            handleCardTypeChange(config.cardType.people);
+          }}
+        >
+          People
+        </button>
+        <button
+          className={`controls__button${cardType === config.cardType.starships ? ' controls__button--active' : ''}`}
+          onClick={() => {
+            handleCardTypeChange(config.cardType.starships);
+          }}
+        >
+          Vehicles
+        </button>
+      </div>
+      <div className="controls__block">
+        <p>Compare:</p>
+        {renderAtrButtons()}
+      </div>
     </div>
   );
 };

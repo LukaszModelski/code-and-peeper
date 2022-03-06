@@ -1,2 +1,18 @@
-@import '../components/Controls/Controls.scss';
+@import '../components/Player/Player.scss';
 @import '../components/Card/Card.scss';
+@import '../components/Controls/Controls.scss';
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.players-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+
+p {
+  margin-top: 0;
+}
