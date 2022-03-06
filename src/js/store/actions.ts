@@ -1,7 +1,6 @@
 import { cardType, personAtrType, starshipAtrType, playerNrType, winnerType } from './reducer';
 
 // actions types
-export const INCREMENT_ROUND: string = 'INCREMENT_ROUND';
 export const SET_CARD_TYPE: string = 'SET_CARD_TYPE';
 export const SET_ATTRIBUTE: string = 'SET_ATTRIBUTE';
 export const SET_PLAYER_CARD_ID: string = 'SET_PLAYER_CARD_ID';
@@ -16,10 +15,6 @@ export type actionType = {
   type: string;
   value?: any;
 }
-
-export const incrementRound = (): actionType => ({
-  type: INCREMENT_ROUND,
-});
 
 export const setCardType = (value: cardType): actionType => ({
   type: SET_CARD_TYPE,

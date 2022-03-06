@@ -1,5 +1,4 @@
 import {
-  INCREMENT_ROUND,
   SET_CARD_TYPE,
   SET_ATTRIBUTE,
   SET_PLAYER_CARD_ID,
@@ -68,11 +67,6 @@ const initialState: stateType = {
 
 export const reducer = (state: stateType = initialState, action: actionType): stateType => {
   switch (action.type) {
-    case INCREMENT_ROUND:
-      return {
-        ...state,
-        round: state.round + 1,
-      };
     case SET_CARD_TYPE:
       return {
         ...state,
