@@ -1,7 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { stateType, cardType, personAtrType, starshipAtrType } from '../../js/store/reducer';
-import { setCardType, setPersonAttribute, setStarshipAttribute, setPlayerCardId, setCard } from '../../js/store/actions';
+import {
+  setCardType,
+  setPersonAttribute,
+  setStarshipAttribute,
+  setPlayerCardId,
+  setCard,
+  clearPlayersCardId,
+} from '../../js/store/actions';
 import { config } from '../../js/config';
 import { fetchPersonById, fetchStarshipById } from '../../js/api';
 import { randFrom0ToX } from '../../js/utils';
@@ -15,6 +22,7 @@ export const Controls = () => {
   const starshipAtr = useSelector((state: stateType) => state.starshipAtr);
 
   const handleCardTypeChange = (cardType: cardType): void => {
+    dispatch(clearPlayersCardId());
     dispatch(setCardType(cardType));
   };
 
@@ -41,7 +49,8 @@ export const Controls = () => {
       if (!cards[cardType][cardId]) {
         const fetchCard = cardType === config.cardType.people ? fetchPersonById : fetchStarshipById;
         try {
-          const card = await fetchCard(cardId);
+          const data: any = await fetchCard(cardId);
+          const card = data.data;
           dispatch(setCard(card, cardId, cardType));
           dispatch(setPlayerCardId(times, cardId));
         } catch (e) {

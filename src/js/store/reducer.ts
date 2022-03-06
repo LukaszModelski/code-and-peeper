@@ -1,4 +1,4 @@
-import { INCREMENT_ROUND, SET_CARD_TYPE, SET_PERSON_ATTRIBUTE, SET_STARSHIP_ATTRIBUTE, SET_PLAYER_CARD_ID, SET_CARD, actionType } from './actions';
+import { INCREMENT_ROUND, SET_CARD_TYPE, SET_PERSON_ATTRIBUTE, SET_STARSHIP_ATTRIBUTE, SET_PLAYER_CARD_ID, SET_CARD, CLEAR_PLAYERS_CARD_ID, actionType } from './actions';
 import { config }  from '../config'
 
 export type cardType =  'people' | 'starships';
@@ -9,11 +9,11 @@ export type starshipAtrType =  'crew' | 'length' | 'cost_in_credits';
 export type stateType = {
   player1: {
     score: number;
-    card: number | undefined;
+    cardId: number | undefined;
   },
   player2: {
     score: number;
-    card: number;
+    cardId: number;
   }
   round: number;
   cards: {
@@ -32,11 +32,11 @@ export type stateType = {
 const initialState: stateType = {
   player1: {
     score: 0,
-    card: undefined,
+    cardId: undefined,
   },
   player2: {
     score: 0,
-    card: undefined,
+    cardId: undefined,
   },
   round: 1,
   cards: {
@@ -77,6 +77,18 @@ export const reducer = (state: stateType = initialState, action: actionType): st
         [player]: {
           ...state[player],
           cardId: action.value.cardId,
+        }
+      };
+    case CLEAR_PLAYERS_CARD_ID:
+      return {
+        ...state,
+        player1: {
+          ...state.player1,
+          cardId: undefined,
+        },
+        player2: {
+          ...state.player2,
+          cardId: undefined,
         }
       };
     case SET_CARD:
